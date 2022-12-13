@@ -1,11 +1,11 @@
-import '../styles/Header.sass';
+import "../styles/Header.sass";
 
 const Header = () => {
-    return(
+    return (
         <header className="header">
-            <h2 className='header__title'>Список дел</h2>
+            <h2 className="header__title">Список дел</h2>
         </header>
-    )
-}
+    );
+};
 
 export default Header;

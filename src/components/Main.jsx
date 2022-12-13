@@ -1,62 +1,63 @@
-import React, { useState } from 'react';
-import '../styles/Main.sass'
-import { uid } from 'uid';
-import Alert from './Alert';
-import clip from '../img/clip.png';
-import Header from './Header';
-import ornamentBig from '../img/ornamentBig.png';
-import ornament from '../img/ornament.png';
-import Todo from './Todo';
+import React, { useState } from "react";
+import "../styles/Main.sass";
+import { uid } from "uid";
+import Alert from "./Alert";
+import Clip from "./Clip";
+import Header from "./Header";
+import OrnamentBig from "./OrnamentBig";
+import Ornament from "./Ornament";
+import Todo from "./Todo";
+import ClearButton from "./ClearButton";
 
 const Main = () => {
-    const [ text, setText ] = useState("");
-    const [ todos, setTodos ] = useState(JSON.parse(localStorage.getItem('todos')));
-    const [ isEditing, setIsEditing ] = useState(false);
+    const getTodosLs = () => {
+        return JSON.parse(localStorage.getItem("todos"));
+    };
+
+    const setTodosLs = (newTodos) => {
+        localStorage.setItem("todos", JSON.stringify(newTodos));
+    };
+
+    const [text, setText] = useState("");
+    const [todos, setTodos] = useState(getTodosLs());
+    const [isEditing, setIsEditing] = useState(false);
     const [editID, setEditId] = useState(null);
-    const [ alert, setAlert ] = useState({show: false, message: "", type: ""});
+    const [alert, setAlert] = useState({ show: false, message: "", type: "" });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!text) {
+        if (!text) {
             showAlert(true, "danger", "Пожалуйста, введите значение");
-        } else if(text && isEditing) {
+        } else if (text && isEditing) {
             let newTodos = todos.map((item) => {
-                if(item.id === editID) {
-                    return {...item, text: text}
+                if (item.id === editID) {
+                    return { ...item, text: text };
                 }
                 return item;
-            })
-            localStorage.setItem('todos', JSON.stringify(newTodos));
-            setTodos(JSON.parse(localStorage.getItem('todos')));
-            setText('');
+            });
+            setTodosLs(newTodos);
+            setTodos(getTodosLs());
+            setText("");
             setEditId(null);
             setIsEditing(false);
             showAlert(true, "success", "Задача изменена");
         } else {
             showAlert(true, "success", "Задача доблена");
-            let newTodos = todos === null ? [
-                {
-                    id: uid(),
-                    text: text,
-                    isImportant: false,
-                    isCompleted: false,
-                }
-            ] : [
-                ...todos,
-                {
-                    id: uid(),
-                    text: text,
-                    isImportant: false,
-                    isCompleted: false,
-                }
-            ]
-            localStorage.setItem('todos', JSON.stringify(newTodos));
-            setTodos(JSON.parse(localStorage.getItem('todos')));
-            setText('');
+            let newTodo = {
+                id: uid(),
+                text: text,
+                isImportant: false,
+                isCompleted: false,
+            };
+
+            let newTodos = todos === null ? [newTodo] : [...todos, newTodo];
+            setTodosLs(newTodos);
+            setTodos(getTodosLs());
+            setText("");
         }
     };
 
-    const showAlert = (show, type, message='') => {
+    const showAlert = (show, type, message = "") => {
         setAlert({ show, type, message });
     };
 
@@ -64,10 +65,10 @@ const Main = () => {
         showAlert(true, "warning", "Задача удалена");
         let newTodos = todos.filter((item) => {
             return item.id !== id;
-        })
-        localStorage.setItem('todos', JSON.stringify(newTodos));
-        setTodos(JSON.parse(localStorage.getItem('todos')));
-    }
+        });
+        setTodosLs(newTodos);
+        setTodos(getTodosLs());
+    };
 
     const editTodo = (id) => {
         const editItem = todos.find((item) => item.id === id);
@@ -77,64 +78,70 @@ const Main = () => {
     };
 
     const makeImportantTodo = (id) => {
-        const importantItem = todos.find(item => item.id === id);
-        if(importantItem.isImportant) {
-            showAlert(true, "warning", "Данная задача больше не является важной"); 
+        const importantItem = todos.find((item) => item.id === id);
+        if (importantItem.isImportant) {
+            showAlert(
+                true,
+                "warning",
+                "Данная задача больше не является важной"
+            );
         } else {
-            showAlert(true, "success", "Задача отмечена как важная!"); 
-        }
-        let newTodos = todos.map((item) => {
-            if(item.id === id) {
-                return {
-                    ...item,
-                    isImportant: !item.isImportant
-                }
-            }
-            return item;
-        })
-        localStorage.setItem('todos', JSON.stringify(newTodos));
-        setTodos(JSON.parse(localStorage.getItem('todos')));
-    }
-
-    const completeTodo = (id) => {
-        const completedItem = todos.find(item => item.id === id);
-        if(completedItem.isCompleted) {
-            showAlert(true, "warning", "Задача пока не выполнена"); 
-        } else {
-            showAlert(true, "success", "Задача выполнена!"); 
+            showAlert(true, "success", "Задача отмечена как важная!");
         }
         let newTodos = todos.map((item) => {
             if (item.id === id) {
                 return {
                     ...item,
-                    isCompleted: !item.isCompleted
-                }
+                    isImportant: !item.isImportant,
+                };
             }
             return item;
-        })
-        localStorage.setItem('todos', JSON.stringify(newTodos));
-        setTodos(JSON.parse(localStorage.getItem('todos')));
-    }
+        });
+        setTodosLs(newTodos);
+        setTodos(getTodosLs());
+    };
+
+    const completeTodo = (id) => {
+        const completedItem = todos.find((item) => item.id === id);
+        if (completedItem.isCompleted) {
+            showAlert(true, "warning", "Задача пока не выполнена");
+        } else {
+            showAlert(true, "success", "Задача выполнена!");
+        }
+        let newTodos = todos.map((item) => {
+            if (item.id === id) {
+                return {
+                    ...item,
+                    isCompleted: !item.isCompleted,
+                };
+            }
+            return item;
+        });
+        setTodosLs(newTodos);
+        setTodos(getTodosLs());
+    };
 
     const clearTodos = () => {
         showAlert(true, "warning", "Все задачи удалены");
-        localStorage.removeItem('todos');
-        setTodos(JSON.parse(localStorage.getItem('todos')));
-    }
+        localStorage.removeItem("todos");
+        setTodos(getTodosLs());
+    };
 
     return (
         <section className="main">
-            {alert.show && <Alert {...alert} removeAlert={showAlert} todos={todos} />}
-            <div className="clip">
-                <img src={clip} alt="clip" />
-            </div>
+            {alert.show && (
+                <Alert {...alert} removeAlert={showAlert} todos={todos} />
+            )}
+            <Clip />
             <div className="main__container">
                 <Header />
-                <div className="ornament-big">
-                    <img src={ornamentBig} alt="ornament" />
-                </div>
+                <OrnamentBig />
                 <div className="todo__add">
-                    <form action="#" className="todo__form" onSubmit={(e) => handleSubmit(e)}>
+                    <form
+                        action="#"
+                        className="todo__form"
+                        onSubmit={(e) => handleSubmit(e)}
+                    >
                         <input
                             type="text"
                             className="todo__input"
@@ -142,40 +149,35 @@ const Main = () => {
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                         />
-                        <button type="submit" 
-                                className="todo__button-submit" 
-                                >{isEditing ? "Изменить" : "Добавить"}
+                        <button type="submit" className="todo__button-submit">
+                            {isEditing ? "Изменить" : "Добавить"}
                         </button>
                     </form>
                 </div>
-                <div className="ornament">
-                    <img src={ornament} alt="ornament" />
-                </div>
+                <Ornament />
                 <div className="wrapper">
                     <div className="todos">
-                    {
-                        todos?.map(todo => {
-                        return <Todo
-                        id={todo.id}
-                        deleteTodo={deleteTodo} 
-                        key={todo.id} 
-                        text={todo.text} 
-                        isImportant={todo.isImportant}
-                        makeImportantTodo={makeImportantTodo}
-                        isCompleted={todo.isCompleted}
-                        completeTodo={completeTodo}
-                        editTodo={editTodo} />
-                        })
-                    }
+                        {todos?.map((todo) => {
+                            return (
+                                <Todo
+                                    id={todo.id}
+                                    deleteTodo={deleteTodo}
+                                    key={todo.id}
+                                    text={todo.text}
+                                    isImportant={todo.isImportant}
+                                    makeImportantTodo={makeImportantTodo}
+                                    isCompleted={todo.isCompleted}
+                                    completeTodo={completeTodo}
+                                    editTodo={editTodo}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
-                <div className="delete-container">
-                <button 
-                    className="btn-delete" onClick={clearTodos}>Удалить все задачи</button>
-                </div> 
+                <ClearButton clearTodos={clearTodos} />
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default Main;
