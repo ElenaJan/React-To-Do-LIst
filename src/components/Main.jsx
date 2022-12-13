@@ -27,7 +27,7 @@ const Main = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!text) {
-            showAlert(true, "danger", "Пожалуйста, введите значение");
+            showAlert(true, "danger", "Пожалуйста, введите задачу");
         } else if (text && isEditing) {
             let newTodos = todos.map((item) => {
                 if (item.id === editID) {
