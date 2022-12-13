@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "//elenajan.github.io/React-To-Do-List/static/css/main.84e616b3.css",
-    "main.js": "//elenajan.github.io/React-To-Do-List/static/js/main.0b43c6f7.js",
-    "static/media/bg.svg": "//elenajan.github.io/React-To-Do-List/static/media/bg.7b95c923dc2d18746660.svg",
-    "static/media/clip.png": "//elenajan.github.io/React-To-Do-List/static/media/clip.64f14d2035a0ebf198ad.png",
-    "static/media/ornamentBig.png": "//elenajan.github.io/React-To-Do-List/static/media/ornamentBig.b6a7beac32564de168c9.png",
-    "static/media/edit.svg": "//elenajan.github.io/React-To-Do-List/static/media/edit.f5200f8201544c5b1097bf825005a00a.svg",
-    "index.html": "//elenajan.github.io/React-To-Do-List/index.html",
-    "static/media/star.svg": "//elenajan.github.io/React-To-Do-List/static/media/star.9fa3cf47e9e69a2acee5.svg",
-    "static/media/complete.svg": "//elenajan.github.io/React-To-Do-List/static/media/complete.67827537426cd5b9f504724aa2318d2f.svg",
-    "static/media/close.svg": "//elenajan.github.io/React-To-Do-List/static/media/close.4beef693c21c301beda1fd6f7840620c.svg",
-    "main.84e616b3.css.map": "//elenajan.github.io/React-To-Do-List/static/css/main.84e616b3.css.map",
-    "main.0b43c6f7.js.map": "//elenajan.github.io/React-To-Do-List/static/js/main.0b43c6f7.js.map"
+    "main.css": "/React-To-Do-List/static/css/main.0384af83.css",
+    "main.js": "/React-To-Do-List/static/js/main.c4657003.js",
+    "static/media/bg.svg": "/React-To-Do-List/static/media/bg.7b95c923dc2d18746660.svg",
+    "static/media/clip.png": "/React-To-Do-List/static/media/clip.64f14d2035a0ebf198ad.png",
+    "static/media/ornamentBig.png": "/React-To-Do-List/static/media/ornamentBig.b6a7beac32564de168c9.png",
+    "static/media/edit.svg": "/React-To-Do-List/static/media/edit.f5200f8201544c5b1097bf825005a00a.svg",
+    "index.html": "/React-To-Do-List/index.html",
+    "static/media/complete.svg": "/React-To-Do-List/static/media/complete.67827537426cd5b9f504724aa2318d2f.svg",
+    "static/media/close.svg": "/React-To-Do-List/static/media/close.4beef693c21c301beda1fd6f7840620c.svg",
+    "main.0384af83.css.map": "/React-To-Do-List/static/css/main.0384af83.css.map",
+    "main.c4657003.js.map": "/React-To-Do-List/static/js/main.c4657003.js.map"
   },
   "entrypoints": [
-    "static/css/main.84e616b3.css",
-    "static/js/main.0b43c6f7.js"
+    "static/css/main.0384af83.css",
+    "static/js/main.c4657003.js"
   ]
 }
