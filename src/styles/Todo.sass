@@ -1,0 +1,66 @@
+.todo
+    box-sizing: border-box
+    max-width: 434px
+    width: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin: 0.3em
+    padding: 0.3em 1em
+    border: 1px solid black
+    border-radius: 40px
+    &-important
+        font-weight: 700
+        background: #D8E0ED
+    &__text-completed
+        text-decoration: line-through
+    &__title
+        text-align: center
+    &__text-content
+        display: flex
+    &__importantBtn
+        border: none
+        background: transparent
+        font-size: 28px
+        line-height: 20px
+        padding: 5px
+        cursor: pointer
+        &-true
+            background: url(../img/star.svg) no-repeat
+            background-size: 15px 15px
+            background-position: center center
+        &:hover
+            -webkit-transform: scale(1.2)
+            -ms-transform: scale(1.2)
+            transform: scale(1.2)
+            transition: all 0.5s
+        &:focus-visible
+            outline: none
+            -webkit-transform: scale(1.2)
+            -ms-transform: scale(1.2)
+            transform: scale(1.2)
+    &__text
+        margin: 0.5em
+    &__buttons
+        display: flex
+    &__button
+        height: 28px
+        width: 28px
+        padding: 0.5em
+        border: 1px solid #000
+        background: #f8f3ee
+        border-radius: 50px
+        display: flex
+        justify-content: center
+        align-items: center
+        margin: 0.3em
+        cursor: pointer
+        &:hover
+            background: #fff
+            transition: all 0.3s
+        &:focus
+            background: #fff
+            outline: none
+        img
+            width: 18px
+            height: 18px
